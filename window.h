@@ -13,7 +13,7 @@
 #define DEF_WIN_HEIGHT    800          /* default window height */
 #define DEF_WIN_FILL_C    0xFFDD00     /* mustard yellow window fill */
 #define DEF_WIN_BORDER_C  0x000000     /* window border color */
-#define DEF_WIN_BORDER_W  0            /* window border stroke size */
+#define DEF_WIN_BORDER_W  2            /* window border stroke size */
 
 typedef struct {
     unsigned int win_parent_x;         /* win parent x */

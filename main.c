@@ -1,13 +1,34 @@
-#include <stdio.h>
+#include <X11/X.h>
 #include <unistd.h>
 #include <X11/Xlib.h>
 
 #include "window.h"
 
+/* xevent holder */
+static XEvent m_event;
+
 void event_dispatcher( XWindow* win ) {
-    getchar();              /* wait for user input */
-    XFlush(win->display);   /* flush events to display */
-    usleep(WINRATE);        /* set a somewhat normal frame rate */
+    XNextEvent(win->display, &m_event);
+    switch (m_event.type) {
+        case Expose:
+            if (m_event.xexpose.count > 0)
+                break;
+        case ButtonPress:
+            switch (m_event.xbutton.button) {
+                case Button1:
+                    /* highlight file if present */
+                    ;
+                case Button2:
+                    /* invoke menu */
+                    XDrawRectangle(win->display, win->win, win->gc, m_event.xbutton.x, m_event.xbutton.y, 50, 100);
+                    break;
+                default:
+                    /* any other button */
+                    break;
+            }
+        default:
+            break;
+    }
 }
 
 int main() {
@@ -26,8 +47,12 @@ int main() {
     __XCreateSimpleWindow(xwin, xargs);
     win_init(xwin);
 
-    /* start main event dispatcher loop */
-    event_dispatcher(xwin);
+    while (1) {
+        event_dispatcher(xwin);
+
+        XFlush(xwin->display);   /* flush events to display */
+        usleep(WINRATE);        /* set a somewhat normal frame rate */
+    }
 
     __close(xwin);
 }
