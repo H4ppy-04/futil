@@ -1,4 +1,5 @@
 #include <X11/X.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <X11/Xlib.h>
 
@@ -24,7 +25,10 @@ int main() {
     __XCreateSimpleWindow(xwin, xargs);
     win_init(xwin);
 
-    while (1) {
+    /* an emergency break is always nice */
+    bool do_loop = true;
+
+    while (do_loop) {
         event_dispatcher(xwin, &m_event);
 
         XFlushGC(xwin->display, xwin->gc);
