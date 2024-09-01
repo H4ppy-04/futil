@@ -11,7 +11,7 @@
 /* XWinArgs defaults */
 #define DEF_WIN_WIDTH     1200         /* default window width */
 #define DEF_WIN_HEIGHT    800          /* default window height */
-#define DEF_WIN_FILL_C    0xFFDD00     /* mustard yellow window fill */
+#define DEF_WIN_FILL_C    0x000000     /* mustard yellow window fill */
 #define DEF_WIN_BORDER_C  0x000000     /* window border color */
 #define DEF_WIN_BORDER_W  2            /* window border stroke size */
 
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int win_width;            /* window width  */
     unsigned int win_height;           /* window height */
 
-    unsigned int win_border_w;         /* border width                   */
+    unsigned int win_border_w;         /* window border width            */
     unsigned int win_border_c;         /* border colour (mustard yellow) */
 
     unsigned int win_fill_c;           /* window fill colour             */

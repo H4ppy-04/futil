@@ -56,8 +56,9 @@ XWinArgs init_default_xargs() {
 }
 
 void __close(XWindow* xwin) {
-    XFreeGC(xwin->display, xwin->gc);                  /* free graphics context     */
-    XUnmapWindow(xwin->display, xwin->win);            /* unmap window from display */
-    XDestroyWindow(xwin->display, xwin->win);          /* remove window from memory */
-    XCloseDisplay(xwin->display);                      /* close display on x server */
+    XFreeGC(xwin->display, xwin->gc);                  /* free graphics context            */
+    XUnmapWindow(xwin->display, xwin->win);            /* unmap window from display        */
+    XDestroyWindow(xwin->display, xwin->win);          /* remove window from memory        */
+    XFlush(xwin->display);                             /* flush any pending rogue requests */
+    XCloseDisplay(xwin->display);                      /* close display on x server        */
 }

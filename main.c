@@ -3,33 +3,10 @@
 #include <X11/Xlib.h>
 
 #include "window.h"
+#include "events.h"
 
 /* xevent holder */
 static XEvent m_event;
-
-void event_dispatcher( XWindow* win ) {
-    XNextEvent(win->display, &m_event);
-    switch (m_event.type) {
-        case Expose:
-            if (m_event.xexpose.count > 0)
-                break;
-        case ButtonPress:
-            switch (m_event.xbutton.button) {
-                case Button1:
-                    /* highlight file if present */
-                    ;
-                case Button2:
-                    /* invoke menu */
-                    XDrawRectangle(win->display, win->win, win->gc, m_event.xbutton.x, m_event.xbutton.y, 50, 100);
-                    break;
-                default:
-                    /* any other button */
-                    break;
-            }
-        default:
-            break;
-    }
-}
 
 int main() {
     XWindow* xwin;
@@ -48,8 +25,9 @@ int main() {
     win_init(xwin);
 
     while (1) {
-        event_dispatcher(xwin);
+        event_dispatcher(xwin, &m_event);
 
+        XFlushGC(xwin->display, xwin->gc);
         XFlush(xwin->display);   /* flush events to display */
         usleep(WINRATE);        /* set a somewhat normal frame rate */
     }
