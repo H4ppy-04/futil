@@ -15,18 +15,18 @@
 #define DEF_WIN_BORDER_C  0x000000     /* window border color */
 #define DEF_WIN_BORDER_W  2            /* window border stroke size */
 
-typedef struct {
-    unsigned int win_parent_x;         /* win parent x */
-    unsigned int win_parent_y;         /* win parent y */
+struct XWinArgs {
+    int win_parent_x;         /* win parent x */
+    int win_parent_y;         /* win parent y */
 
-    unsigned int win_width;            /* window width  */
-    unsigned int win_height;           /* window height */
+    int win_width;            /* window width  */
+    int win_height;           /* window height */
 
-    unsigned int win_border_w;         /* window border width            */
-    unsigned int win_border_c;         /* border colour (mustard yellow) */
+    int win_border_w;         /* window border width            */
+    int win_border_c;         /* border colour (mustard yellow) */
 
-    unsigned int win_fill_c;           /* window fill colour             */
-} XWinArgs;
+    int win_fill_c;           /* window fill colour             */
+};
 
 
 typedef struct {
@@ -40,7 +40,7 @@ void win_init( XWindow* xwin );
 /*
  * Wrapper for XCreateSimpleWindow
  */
-void __XCreateSimpleWindow(XWindow* xwin, XWinArgs xargs);
+void __XCreateSimpleWindow(XWindow* xwin, struct XWinArgs xargs);
 
 /*
  * Unmap display and move display and window out of memory
@@ -50,6 +50,6 @@ void __close( XWindow* xwin );
 /*
  * Initialize default XWinArgs object with defaults.
  */
-XWinArgs init_default_xargs();
+struct XWinArgs init_default_xargs();
 
 #endif
