@@ -1,5 +1,6 @@
 #include "window.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void
 win_init (XWindow *win)
@@ -44,19 +45,19 @@ __XCreateSimpleWindow (XWindow *xwin, struct XWinArgs xargs)
  *
  * Double check that all the values are accurate and correspond correctly
  */
-struct XWinArgs
-init_default_xargs ()
+void
+init_default_xargs (struct XWinArgs *m_xargs)
 {
-  struct XWinArgs xargs = {
-    .win_parent_x = 0,
-    .win_parent_y = 0,
-    .win_width = DEF_WIN_WIDTH,
-    .win_height = DEF_WIN_HEIGHT,
-    .win_fill_c = DEF_WIN_FILL_C,
-    .win_border_w = DEF_WIN_BORDER_W,
-  };
+  m_xargs->win_parent_x = 0;
+  m_xargs->win_parent_y = 0;
 
-  return xargs;
+  m_xargs->win_width = 1200;
+  m_xargs->win_height = 800;
+
+  m_xargs->win_border_w = 2;
+  m_xargs->win_border_c = 0x000000;
+
+  m_xargs->win_fill_c = 0x000000;
 }
 
 void

@@ -50,6 +50,6 @@ void __close( XWindow* xwin );
 /*
  * Initialize default XWinArgs object with defaults.
  */
-struct XWinArgs init_default_xargs();
+void init_default_xargs(struct XWinArgs* m_xargs);
 
 #endif
